@@ -16,7 +16,6 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class RestoSerializer(serializers.ModelSerializer):
-
     class Meta:
         ordering = ['-id']
         model = Resto
@@ -28,7 +27,7 @@ class SpecialiteSerializer(serializers.ModelSerializer):
     restos = RestoSerializer(many=True, read_only=True)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['-nom']
         model = Specialite
         fields = ("id", "nom", "restos")
         extra_kwargs = {'restos': {'required': False}}

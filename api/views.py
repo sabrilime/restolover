@@ -1,3 +1,4 @@
+from ast import operator
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -14,16 +15,17 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (AllowAny,)
 
 class RestoViewSet(viewsets.ModelViewSet):
+    search_fields = ['nom', 'adresse', 'code_postal', 'ville', 'pays', 'instagram']
+    filter_backends = (filters.SearchFilter,)
     queryset = Resto.objects.all()
     serializer_class = RestoSerializer
     authentication_classes = (TokenAuthentication, )
     permission_classes = (IsAuthenticated,)
 
 class SpecialiteViewSet(viewsets.ModelViewSet):
-    queryset = Specialite.objects.all()
+    queryset = Specialite.objects.all().order_by('nom')
     serializer_class = SpecialiteSerializer
     authentication_classes = (TokenAuthentication, )
     permission_classes = (IsAuthenticated,)
     
     filter_backends = [filters.OrderingFilter]
-    ordering_fields = ['nom']

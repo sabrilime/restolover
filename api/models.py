@@ -13,5 +13,5 @@ class Resto(models.Model):
     halal = models.BooleanField(default = False)
     instagram = models.CharField(max_length=120, null=True, blank=True)
     tripadvisor = models.CharField(max_length=120, null=True, blank=True)
-    specialites = models.ManyToManyField('Specialite', related_name='restos', blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    specialites = models.ManyToManyField('Specialite', related_name='restos', null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
